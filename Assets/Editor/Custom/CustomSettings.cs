@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using LuaInterface;
+using KBEngine;
 
 using BindType = ToLuaMenu.BindType;
+using UnityEngine.UI;
 using System.Reflection;
 
 public static class CustomSettings
@@ -40,18 +42,8 @@ public static class CustomSettings
     //在这里添加你要导出注册到lua的类型列表
     public static BindType[] customTypeList =
     {                
-        //------------------------为例子导出--------------------------------
-        //_GT(typeof(TestEventListener)),
-        //_GT(typeof(TestProtol)),
-        //_GT(typeof(TestAccount)),
-        //_GT(typeof(Dictionary<int, TestAccount>)).SetLibName("AccountMap"),
-        //_GT(typeof(KeyValuePair<int, TestAccount>)),    
-        //_GT(typeof(TestExport)),
-        //_GT(typeof(TestExport.Space)),
-        //-------------------------------------------------------------------        
-                
-        _GT(typeof(Debugger)).SetNameSpace(null),        
-
+        _GT(typeof(Debugger)).SetNameSpace(null),
+                                       
 #if USING_DOTWEENING
         _GT(typeof(DG.Tweening.DOTween)),
         _GT(typeof(DG.Tweening.Tween)).SetBaseType(typeof(System.Object)).AddExtendType(typeof(DG.Tweening.TweenExtensions)),
@@ -138,8 +130,29 @@ public static class CustomSettings
         _GT(typeof(QualitySettings)),
         _GT(typeof(RenderSettings)),                                                   
         _GT(typeof(BlendWeights)),           
-        _GT(typeof(RenderTexture)),
-        _GT(typeof(Resources)),
+        _GT(typeof(RenderTexture)),    
+		_GT(typeof(Resources)),   
+          
+        //for LuaFramework
+        _GT(typeof(RectTransform)),
+        _GT(typeof(Text)),
+        _GT(typeof(InputField)),
+        _GT(typeof(Toggle)),
+        _GT(typeof(Scrollbar)),
+        _GT(typeof(Slider)),
+        
+
+        _GT(typeof(GameManager)),
+        _GT(typeof(LuaManager)),
+		  
+
+        //kbengine
+        _GT(typeof(KBEngine.NetworkInterface)),
+        _GT(typeof(KBEngine.MemoryStream)),
+        //_GT(typeof(KBEngine.PersistentInfos)),
+        _GT(typeof(KBEngine.KBELuaUtil)),
+
+        
     };
 
     public static List<Type> dynamicList = new List<Type>()

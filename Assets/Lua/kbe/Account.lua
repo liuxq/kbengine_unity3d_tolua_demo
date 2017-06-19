@@ -18,14 +18,9 @@ function KBEngineLua.Account:__init__( )
     self:baseCall({"reqAvatarList"});
 end
 
-function KBEngineLua.Account:reqCreateAvatar(name, roleType)
-    local role = 1;
-    if (roleType == "战士") then
-        role = 1;
-    elseif (roleType == "法师") then
-        role = 2;
-    end
-    self:baseCall({ "reqCreateAvatar", name, role });
+function KBEngineLua.Account:reqCreateAvatar(roleType，name)
+    log("Account::reqCreateAvatar: roleType=" .. roleType);
+    self:baseCall({ "reqCreateAvatar", role, name});
 end
 
 function KBEngineLua.Account:reqRemoveAvatar(name)

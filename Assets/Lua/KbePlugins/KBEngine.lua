@@ -9,12 +9,7 @@ require "KbePlugins/Bundle"
 require "KbePlugins/Mailbox"
 require "KbePlugins/Entity"
 require "KbePlugins/PersistentInfos"
-require "Kbe/Account"
-require "Kbe/Avatar"
-require "Kbe/Gate"
-require "Kbe/Monster"
-require "Kbe/NPC"
-require "Kbe/DroppedItem"
+
 
 
 -----------------可配置信息---------------

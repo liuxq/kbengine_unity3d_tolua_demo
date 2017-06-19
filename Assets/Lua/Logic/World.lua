@@ -1,7 +1,4 @@
 require "Logic/CameraFollow"
-require "Logic/InputControl"
-require "Logic/Character"
-require "Logic/SelectControl"
 require "Logic/SkillControl"
 
 World = {
