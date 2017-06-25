@@ -44,14 +44,14 @@ namespace KBEngine
         /// </summary>
         public static object[] CallMethod(string module, string func, params object[] args)
         {
-            LuaManager luaMgr = GameObject.Find("LuaManager").GetComponent<LuaManager>();
+            LuaManager luaMgr = GameObject.Find("Manager").GetComponent<LuaManager>();
             if (luaMgr == null) return null;
             return luaMgr.CallFunction(module + "." + func, args);
         }
 
         public static object[] CallMethod(string func, params object[] args)
         {
-            LuaManager luaMgr = GameObject.Find("LuaManager").GetComponent<LuaManager>();
+            LuaManager luaMgr = GameObject.Find("Manager").GetComponent<LuaManager>();
             if (luaMgr == null) return null;
             return luaMgr.CallFunction(func, args);
         }

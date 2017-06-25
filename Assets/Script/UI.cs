@@ -19,7 +19,7 @@ public class UI : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-
+        KBELuaUtil.CallMethod("UI", "Start");
 	}
 
 	void OnDestroy()
@@ -34,8 +34,8 @@ public class UI : MonoBehaviour
 	}
 
     void OnGUI()  
-    {  
-		
+    {
+        KBELuaUtil.CallMethod("UI", "OnGUI");
 	}  
 
 }

@@ -7,6 +7,7 @@ require "Kbe/Gate"
 require "Kbe/Monster"
 require "Kbe/NPC"
 require "Logic/World"
+require "View/UI"
 
 
 --管理器--

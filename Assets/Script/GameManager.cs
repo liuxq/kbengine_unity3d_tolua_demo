@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
     /// <summary>
     /// 初始化游戏管理器
     /// </summary>
-    void Awake() {
+    void Start() {
         Init();
     }
 

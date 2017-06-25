@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using LuaInterface;
 using KBEngine;
+using UnityEngine.SceneManagement;
 
 using BindType = ToLuaMenu.BindType;
 using UnityEngine.UI;
@@ -27,6 +28,8 @@ public static class CustomSettings
         typeof(UnityEngine.RenderSettings),
         typeof(UnityEngine.QualitySettings),
         typeof(UnityEngine.GL),
+        
+        
     };
 
     //附加导出委托类型(在导出委托时, customTypeList 中牵扯的委托类型都会导出， 无需写在这里)
@@ -152,6 +155,10 @@ public static class CustomSettings
         //_GT(typeof(KBEngine.PersistentInfos)),
         _GT(typeof(KBEngine.KBELuaUtil)),
 
+        //for demo
+        _GT(typeof(Rect)),   
+        _GT(typeof(UnityEngine.SceneManagement.SceneManager)),
+        _GT(typeof(UnityEngine.GUI)),
         
     };
 
