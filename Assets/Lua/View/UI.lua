@@ -54,6 +54,7 @@ function UI.installEvents()
 	Event.AddListener("onReqAvatarList", UI.onReqAvatarList);
 	Event.AddListener("onCreateAvatarResult", UI.onCreateAvatarResult);
 	Event.AddListener("onRemoveAvatar", UI.onRemoveAvatar);
+
 end
 
 function UI.OnDestroy()
@@ -91,8 +92,12 @@ function UI.onSelAvatarUI()
     	else
     		this.info("Please wait...(请稍后...)");
     		
-			Event.fireIn("selectAvatarGame", this.selAvatarDBID);
-			Application.LoadLevel("world");
+    		local p = KBEngineLua.player();
+			if p ~= nil then
+				p:selectAvatarGame(this.selAvatarDBID);
+			end
+
+			SceneManager.LoadScene("world");
 			ui_state = 2;
 		end
     end
@@ -114,7 +119,7 @@ function UI.onSelAvatarUI()
         this.stringAvatarName = GUI.TextField(Rect.New(Screen.width / 2 - 100, Screen.height - 75, 200, 30), this.stringAvatarName, 20);
 	end
 	
-	if(this.ui_avatarList ~= nil and #this.ui_avatarList > 0) then
+	if(this.ui_avatarList ~= nil) then
 		local idx = 0;
 
 		for dbid,v in pairs(this.ui_avatarList)
@@ -132,7 +137,7 @@ function UI.onSelAvatarUI()
 				GUI.contentColor = Color.red;
 			end
 			
-			if (GUI.Button(Rect.New(Screen.width / 2 - 100, Screen.height / 2 .. 120 - 35 * idx, 200, 30), name)) then
+			if (GUI.Button(Rect.New(Screen.width / 2 - 100, Screen.height / 2 + 120 - 35 * idx, 200, 30), name)) then
 				log("selAvatar:" .. name);
 				this.selAvatarDBID = idbid;
 			end
@@ -185,7 +190,7 @@ function UI.onWorldUI()
 	
 	local obj = UnityEngine.GameObject.Find("player(Clone)");
 	if(obj ~= nil) then
-		GUI.Label(Rect.New((Screen.width / 2) - 100, 20, 400, 100), "position=" .. obj.transform.position.ToString()); 
+		GUI.Label(Rect.New((Screen.width / 2) - 100, 20, 400, 100), "position=" .. obj.transform.position["x"]..obj.transform.position["y"]..obj.transform.position["z"]); 
 	end
 end
 

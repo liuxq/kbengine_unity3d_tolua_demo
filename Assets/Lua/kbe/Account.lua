@@ -18,9 +18,9 @@ function KBEngineLua.Account:__init__( )
     self:baseCall({"reqAvatarList"});
 end
 
-function KBEngineLua.Account:reqCreateAvatar(roleType，name)
+function KBEngineLua.Account:reqCreateAvatar(roleType, name)
     log("Account::reqCreateAvatar: roleType=" .. roleType);
-    self:baseCall({ "reqCreateAvatar", role, name});
+    self:baseCall({ "reqCreateAvatar", roleType, name});
 end
 
 function KBEngineLua.Account:reqRemoveAvatar(name)
@@ -28,7 +28,7 @@ function KBEngineLua.Account:reqRemoveAvatar(name)
     self:baseCall({"reqRemoveAvatar", name});
 end
 
-function KBEngineLua.Account:reqSelectAvatarGame(dbid)
+function KBEngineLua.Account:selectAvatarGame(dbid)
     log("Account::reqSelectAvatarGame: dbid=" .. tostring(dbid));
     self:baseCall({"selectAvatarGame", dbid});
 end

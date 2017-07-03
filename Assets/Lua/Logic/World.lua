@@ -6,6 +6,10 @@ World = {
 
 local convertRad2Angle = 360 / (Mathf.PI * 2);
 
+function newObject(prefab)
+  	return UnityEngine.Object.Instantiate(prefab);
+end
+
 function World.init()
 	Event.AddListener("onAvatarEnterWorld", World.onAvatarEnterWorld);
 	Event.AddListener("onEnterWorld", World.onEnterWorld);
@@ -28,36 +32,23 @@ function World.onAvatarEnterWorld( avatar )
 		return;
 	end
 
+	local obj = UnityEngine.Resources.Load("player");
+	local go = newObject(obj);
+	avatar.renderObj = go;
+	go.transform.position = avatar.position;
+	--go.transform.direction = avatar.direction;
+	CameraFollow.target = go.transform;
+	CameraFollow.ResetView();
+	CameraFollow.FollowUpdate();
 
-	resMgr:LoadPrefab('Model', { 'player' }, function(objs)
-		local go = newObject(objs[0]);
-		avatar.renderObj = go;
-		go.transform.position = avatar.position;
-		--go.transform.direction = avatar.direction;
-		CameraFollow.target = go.transform;
-		CameraFollow.ResetView();
-		CameraFollow.FollowUpdate();
-
-		InputControl.Init(avatar);
-		InputControl.OnEnable();
-		
-		--初始化对象
-		World.InitEntity(avatar);
-
-		local joystick = find("Joystick").transform:Find("GameJoystick");
-		if joystick then
-			joystick.gameObject:SetActive(true);
-		end
-
-		--初始化角色技能控制
-		SkillControl.Init(avatar);
-	end);
+	InputControl.Init(avatar);
+	InputControl.OnEnable();
 	
-	GameWorldCtrl.Awake();
-	PlayerHeadCtrl.Awake();
-	TargetHeadCtrl.Awake();
-	
-	SelectAvatarCtrl.Close();
+	--初始化对象
+	World.InitEntity(avatar);
+
+	--初始化角色技能控制
+	SkillControl.Init(avatar);
 
 	UpdateBeat:Add(SelectControl.Update);
 	UpdateBeat:Add(SkillControl.Update);

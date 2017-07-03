@@ -159,6 +159,7 @@ public static class CustomSettings
         _GT(typeof(Rect)),   
         _GT(typeof(UnityEngine.SceneManagement.SceneManager)),
         _GT(typeof(UnityEngine.GUI)),
+        _GT(typeof(UnityEngine.Object)),
         
     };
 
