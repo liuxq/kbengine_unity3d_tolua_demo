@@ -69,15 +69,20 @@ function UI.Update()
     end
 end
 function UI.onSelAvatarUI()
+	
 	if (this.startCreateAvatar == false and GUI.Button(Rect.New(Screen.width / 2 - 100, Screen.height - 40, 200, 30), "RemoveAvatar(删除角色)")) then
 		if(this.selAvatarDBID == 0) then
 			logError("Please select a Avatar!(请选择角色!)");
 		else
 			this.info("Please wait...(请稍后...)");
 			
-			if(this.ui_avatarList ~= nil and #this.ui_avatarList > 0) then
+			if(this.ui_avatarList ~= nil) then
 				local avatarinfo = this.ui_avatarList[this.selAvatarDBID];
-				--Event.fireIn("reqRemoveAvatar", avatarinfo["name"]); temp
+
+				local p = KBEngineLua.player();
+				if p ~= nil then
+					p:reqRemoveAvatar(avatarinfo["name"]);
+				end
 			end
 		end
     end

@@ -1,5 +1,6 @@
 require "Logic/CameraFollow"
 require "Logic/SkillControl"
+require "Logic/GameEntity"
 
 World = {
 };
@@ -40,9 +41,6 @@ function World.onAvatarEnterWorld( avatar )
 	CameraFollow.target = go.transform;
 	CameraFollow.ResetView();
 	CameraFollow.FollowUpdate();
-
-	InputControl.Init(avatar);
-	InputControl.OnEnable();
 	
 	--初始化对象
 	World.InitEntity(avatar);
@@ -50,7 +48,6 @@ function World.onAvatarEnterWorld( avatar )
 	--初始化角色技能控制
 	SkillControl.Init(avatar);
 
-	UpdateBeat:Add(SelectControl.Update);
 	UpdateBeat:Add(SkillControl.Update);
 	
 end
@@ -60,48 +57,16 @@ function World.onEnterWorld( entity )
 		return;
 	end
 
-	if entity.className == "Gate" then
-		resMgr:LoadPrefab('Model', { 'Gate' }, function(objs)
-			entity.renderObj = newObject(objs[0]);
-			entity.renderObj.transform.position = entity.position;
-			World.InitEntity(entity);
-		end);
-	elseif entity.className == "Monster" then
-		resMgr:LoadPrefab('Model', { 'player' }, function(objs)
-			entity.renderObj = newObject(objs[0]);
-			entity.renderObj.transform.position = entity.position;
-			World.InitEntity(entity);
-		end);
-	elseif entity.className == "DroppedItem" then
-		resMgr:LoadPrefab('Model', { 'droppedItem' }, function(objs)
-			entity.renderObj = newObject(objs[0]);
-			entity.renderObj.transform.position = entity.position;
-			World.InitEntity(entity);
-		end);
-	elseif entity.className == "Avatar" then
-		resMgr:LoadPrefab('Model', { 'player' }, function(objs)
-			entity.renderObj = newObject(objs[0]);
-			entity.renderObj.transform.position = entity.position;
-			World.InitEntity(entity);
-		end);
-	elseif entity.className == "NPC" then
-		resMgr:LoadPrefab('Model', { 'player' }, function(objs)
-			entity.renderObj = newObject(objs[0]);
-			entity.renderObj.transform.position = entity.position;
-			World.InitEntity(entity);
-		end);
-	end
+	local obj = newObject(UnityEngine.Resources.Load("entity"));
+	entity.renderObj = obj;
+	entity.renderObj.transform.position = entity.position;
+	World.InitEntity(entity);
 
 end
 
 function World.InitEntity( entity )
-	if entity.className == "Gate" or entity.className == "DroppedItem" then
-		entity.gameEntity = GameEntity:New();
-	else
-		entity.gameEntity = Character:New();
-	end
+	entity.gameEntity = GameEntity:New();
 	entity.gameEntity:Init(entity);		
-
 	if entity.name then
 		World.set_name( entity , entity.name )
 	end
@@ -124,9 +89,9 @@ function World.onLeaveWorld(entity)
 end
 
 function World.addSpaceGeometryMapping( path )
-	resMgr:LoadPrefab('Terrain', { 'Terrain' }, function(objs)
-		newObject(objs[0]);
-	end);
+
+	local obj = newObject(UnityEngine.Resources.Load("terrain"));
+
 end
 
 function World.set_position( entity )
