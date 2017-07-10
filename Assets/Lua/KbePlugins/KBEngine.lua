@@ -1535,7 +1535,7 @@ end
 KBEngineLua.login = function( username, password, data )
 	KBEngineLua.username = username;
 	KBEngineLua.password = password;
-    KBEngineLua._clientdatas = 'lxq';
+    KBEngineLua._clientdatas = data;
 	
 	KBEngineLua.login_loginapp(true);
 end

@@ -121,24 +121,12 @@ function World.set_state( entity , v)
 end
 
 function World.set_HP( entity , v)
-	if entity.renderObj ~= nil then
-		if PlayerHeadCtrl.target == entity then
-			PlayerHeadCtrl.UpdateTargetUI();
-		end
-		if TargetHeadCtrl.target == entity then
-			TargetHeadCtrl.UpdateTargetUI();
-		end
-	end
+	
 end
 
 function World.set_HP_Max( entity , v)
 	if entity.renderObj ~= nil then
-		if PlayerHeadCtrl.target == entity then
-			PlayerHeadCtrl.UpdateTargetUI();
-		end
-		if TargetHeadCtrl.target == entity then
-			TargetHeadCtrl.UpdateTargetUI();
-		end
+		entity.gameEntity:UpdateHp();
 	end
 end
 

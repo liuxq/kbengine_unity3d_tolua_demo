@@ -35,7 +35,8 @@ end
 function GameEntity:Init( entity )
 	self.entity = entity;
 	self:StartUpdate();
-	self.headName = entity.renderObj.transform:Find("Canvas/Text"):GetComponent("Text");
+	self.headName = entity.renderObj.transform:Find("Canvas/name"):GetComponent("Text");
+	self.headHp = entity.renderObj.transform:Find("Canvas/hp"):GetComponent("Text");
 	self.headNameCanvasTrans = entity.renderObj.transform:Find("Canvas").transform;
 	self.cameraTransform = UnityEngine.Camera.main.transform;
 end
@@ -45,6 +46,14 @@ function GameEntity:SetName( name )
 	self.entityName = name;
     if self.headName ~= nil then
         self.headName.text = self.entityName;
+    end
+end
+
+function GameEntity:UpdateHp( )
+	--绘制头顶hp
+
+    if self.headHp ~= nil then
+        self.headHp.text = self.entity.HP.."/"..self.entity.HP_Max;
     end
 end
 

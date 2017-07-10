@@ -240,13 +240,13 @@ end
 
 function UI.login()
 	this.info("connect to server...(连接到服务端...)");
-	KBEngineLua.login(this.stringAccount, this.stringPasswd, KBELuaUtil.Utf8ToByte("kbengine_unity3d_demo"))
+	KBEngineLua.login(this.stringAccount, this.stringPasswd, "kbengine_unity3d_demo")
 end
 
 function UI.createAccount()
 	this.info("connect to server...(连接到服务端...)");
 	
-	KBEngineLua.createAccount(this.stringAccount, this.stringPasswd, KBELuaUtil.Utf8ToByte("kbengine_unity3d_demo"));
+	KBEngineLua.createAccount(this.stringAccount, this.stringPasswd, "kbengine_unity3d_demo");
 end
 
 function UI.onCreateAccountResult(retcode, datas)
