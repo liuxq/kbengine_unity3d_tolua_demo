@@ -20,7 +20,6 @@ function KBEngineLua.Avatar:__init__( )
 	if self:isPlayer() then
         Event.AddListener("relive", self.relive);
         Event.AddListener("updatePlayer", self.updatePlayer);
-        Event.AddListener("sendChatMessage", self.sendChatMessage);
     end
 end
 
@@ -43,9 +42,6 @@ function KBEngineLua.Avatar:relive(type)
     self:cellCall({"relive", type});
 end
 
-function KBEngineLua.Avatar:sendChatMessage(msg)
-    self:baseCall({"sendChatMessage", self.name .. ": " .. msg});
-end
 
 function KBEngineLua.Avatar:useTargetSkill(skillID, target)        
     local skill = SkillBox.Get(skillID);
@@ -66,10 +62,6 @@ end
 
 -------client method-----------------------------------
 
-function KBEngineLua.Avatar:ReceiveChatMessage(msg)
-    Event.Brocast("ReceiveChatMessage", msg);
-end
-
 function KBEngineLua.Avatar:onAddSkill(skillID)        
     log(self.className .. "::onAddSkill(" .. skillID .. ")");
 
@@ -78,39 +70,39 @@ function KBEngineLua.Avatar:onAddSkill(skillID)
     skill.name = skillID .. " ";
     if skillID == 1 then
         skill.displayType = 1;
-        skill.canUseDistMax = 30;
+        skill.canUseDistMax = 20;
         skill.skillEffect = "skill1";
         skill.name = "魔法球";
-    elseif skillID == 2 then
+    elseif skillID == 1000101 then
         skill.displayType = 1;
-        skill.canUseDistMax = 30;
+        skill.canUseDistMax = 20;
         skill.skillEffect = "skill2";
         skill.name = "火球";
-    elseif skillID == 3 then
+    elseif skillID == 2000101 then
         skill.displayType = 1;
         skill.canUseDistMax = 20;
         skill.skillEffect = "skill3";
         skill.name = "治疗";
-    elseif skillID == 4 then
+    elseif skillID == 3000101 then
         skill.displayType = 0;
-        skill.canUseDistMax = 5;
+        skill.canUseDistMax = 20;
         skill.skillEffect = "skill4";
         skill.name = "斩击";
-    elseif skillID == 5 then
+    elseif skillID == 4000101 then
         skill.displayType = 0;
-        skill.canUseDistMax = 5;
+        skill.canUseDistMax = 20;
         skill.skillEffect = "skill5";
         skill.name = "挥击";
-    elseif skillID == 6 then
+    elseif skillID == 5000101 then
         skill.displayType = 0;
-        skill.canUseDistMax = 5;
+        skill.canUseDistMax = 20;
         skill.skillEffect = "skill6";
         skill.name = "吸血";
-    else
+    elseif skillID == 6000101 then
         skill.displayType = 0;
-        skill.canUseDistMax = 5;
+        skill.canUseDistMax = 20;
         skill.skillEffect = "skill6";
-        skill.name = "未知";
+        skill.name = "吸血";
     end;
 
     SkillBox.Add(skill);
