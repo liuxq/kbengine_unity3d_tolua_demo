@@ -175,8 +175,8 @@ function UI.onLoginUI()
 		log("this.stringAccount:" .. this.stringAccount);
 		log("this.stringPasswd:" .. this.stringPasswd);
 
-		if(this.stringAccount.Length > 0 and this.stringPasswd.Length > 5) then
-			createAccount();
+		if(#this.stringAccount > 0 and #this.stringPasswd > 5) then
+			this.createAccount();
 		else
 			logError("account or password is error, length < 6!(账号或者密码错误，长度必须大于5!)");
 		end
@@ -250,6 +250,7 @@ function UI.createAccount()
 end
 
 function UI.onCreateAccountResult(retcode, datas)
+	logError("error"..retcode);
 	if(retcode ~= 0) then
 		logError("createAccount is error(注册账号错误)! err=" .. KBEngineLua.serverlogError(retcode));
 		return;
