@@ -38,6 +38,7 @@ function GameEntity:Init( entity )
 	self.headName = entity.renderObj.transform:Find("Canvas/name"):GetComponent("Text");
 	self.headHp = entity.renderObj.transform:Find("Canvas/hp"):GetComponent("Text");
 	self.headNameCanvasTrans = entity.renderObj.transform:Find("Canvas").transform;
+	self.material = entity.renderObj.transform:FindChild("Graphics"):GetComponent("MeshRenderer").material;
 	self.cameraTransform = UnityEngine.Camera.main.transform;
 end
 
@@ -59,6 +60,21 @@ end
 
 function GameEntity:OnState( v )
 	--状态
+	if (v == 3) then
+		if(self.entity:isPlayer()) then
+			material.color = Color.green;
+		else
+			material.color = Color.red;
+		end
+	elseif (v == 0) then
+		if(self.entity:isPlayer()) then
+			material.color = Color.blue;
+		else
+			material.color = Color.white;
+		end
+	elseif (v == 1) then
+		material.color = Color.black;
+	end
 end
 
 function GameEntity:StartUpdate()

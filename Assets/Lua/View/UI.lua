@@ -189,7 +189,11 @@ end
 function UI.onWorldUI()
 	if(this.showReliveGUI) then
 		if(GUI.Button(Rect.New(Screen.width / 2 - 100, Screen.height / 2, 200, 30), "Relive(复活)")) then
-			--Event.fireIn("relive", 1);		        	
+			--Event.fireIn("relive", 1);	
+			local p = KBEngineLua.player();
+			if p ~= nil then
+				p:relive(1);
+			end
 		end
 	end
 	
@@ -250,9 +254,8 @@ function UI.createAccount()
 end
 
 function UI.onCreateAccountResult(retcode, datas)
-	logError("error"..retcode);
 	if(retcode ~= 0) then
-		logError("createAccount is error(注册账号错误)! err=" .. KBEngineLua.serverlogError(retcode));
+		this.info("createAccount is error(注册账号错误)! err=" .. KBEngineLua.serverErrs[retcode].name);
 		return;
 	end
 	

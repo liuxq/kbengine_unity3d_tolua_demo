@@ -9,6 +9,19 @@ namespace KBEngine
 {
     public static class KBELuaUtil
     {
+        private static LuaManager luaMgr = null;
+
+        private static LuaManager GetLuaMgr()
+        {
+            if (luaMgr == null)
+            {
+                GameObject go = GameObject.Find("Manager");
+                if(go != null)
+                    luaMgr = go.GetComponent<LuaManager>();
+            }
+            return luaMgr;
+        }
+
         public static byte[] Utf8ToByte(object utf8)
         {
             return System.Text.Encoding.UTF8.GetBytes((string)utf8);
@@ -44,16 +57,14 @@ namespace KBEngine
         /// </summary>
         public static object[] CallMethod(string module, string func, params object[] args)
         {
-            LuaManager luaMgr = GameObject.Find("Manager").GetComponent<LuaManager>();
-            if (luaMgr == null) return null;
-            return luaMgr.CallFunction(module + "." + func, args);
+            if (GetLuaMgr() == null) return null;
+            return GetLuaMgr().CallFunction(module + "." + func, args);
         }
 
         public static object[] CallMethod(string func, params object[] args)
         {
-            LuaManager luaMgr = GameObject.Find("Manager").GetComponent<LuaManager>();
-            if (luaMgr == null) return null;
-            return luaMgr.CallFunction(func, args);
+            if (GetLuaMgr() == null) return null;
+            return GetLuaMgr().CallFunction(func, args);
         }
 
         public static void createFile(string path, string name, byte[] datas)

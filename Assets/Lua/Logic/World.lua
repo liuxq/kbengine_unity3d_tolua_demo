@@ -116,7 +116,11 @@ function World.set_state( entity , v)
 		entity.gameEntity:OnState(v);
 	end
 	if entity:isPlayer() then
-		GameWorldCtrl.OnDie(v);
+		if(v == 1) then
+			UI.showReliveGUI = true;
+		else
+			UI.showReliveGUI = false;
+		end
 	end
 end
 
