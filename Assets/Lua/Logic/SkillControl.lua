@@ -29,8 +29,6 @@ function SkillControl.Update()
         else        
             this.transform:LookAt(this.moveDes);
             this.transform:Translate(Vector3.forward * Time.deltaTime * 5);
-            --移动摄像机
-            CameraFollow.FollowUpdate();
             --播放奔跑动画
             this.animator.speed = 2.0;
             this.animator:SetFloat("Speed", 1.0);

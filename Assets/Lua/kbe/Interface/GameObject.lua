@@ -1,6 +1,7 @@
 require "KbePlugins/Entity"
 
 KBEngineLua.GameObject = {
+	gameEntity = nil,
 };
 
 KBEngineLua.GameObject = KBEngineLua.Entity:New(KBEngineLua.GameObject);--继承

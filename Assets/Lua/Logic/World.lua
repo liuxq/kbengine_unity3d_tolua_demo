@@ -1,4 +1,4 @@
-require "Logic/CameraFollow"
+require "Logic/MouseLook"
 require "Logic/SkillControl"
 require "Logic/GameEntity"
 
@@ -38,10 +38,8 @@ function World.onAvatarEnterWorld( avatar )
 	avatar.renderObj = go;
 	go.transform.position = avatar.position;
 	--go.transform.direction = avatar.direction;
-	CameraFollow.target = go.transform;
-	CameraFollow.ResetView();
-	CameraFollow.FollowUpdate();
-	
+	MouseLook.transform = go.transform;
+	MouseLook.StartUpdate();
 	--初始化对象
 	World.InitEntity(avatar);
 
