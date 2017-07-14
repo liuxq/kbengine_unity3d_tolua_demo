@@ -62,18 +62,18 @@ function GameEntity:OnState( v )
 	--状态
 	if (v == 3) then
 		if(self.entity:isPlayer()) then
-			material.color = Color.green;
+			self.material.color = Color.green;
 		else
-			material.color = Color.red;
+			self.material.color = Color.red;
 		end
 	elseif (v == 0) then
 		if(self.entity:isPlayer()) then
-			material.color = Color.blue;
+			self.material.color = Color.blue;
 		else
-			material.color = Color.white;
+			self.material.color = Color.white;
 		end
 	elseif (v == 1) then
-		material.color = Color.black;
+		self.material.color = Color.black;
 	end
 end
 

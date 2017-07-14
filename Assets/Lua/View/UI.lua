@@ -189,7 +189,6 @@ end
 function UI.onWorldUI()
 	if(this.showReliveGUI) then
 		if(GUI.Button(Rect.New(Screen.width / 2 - 100, Screen.height / 2, 200, 30), "Relive(复活)")) then
-			--Event.fireIn("relive", 1);	
 			local p = KBEngineLua.player();
 			if p ~= nil then
 				p:relive(1);

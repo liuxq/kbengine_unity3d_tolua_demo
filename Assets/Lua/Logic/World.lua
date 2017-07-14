@@ -1,4 +1,4 @@
-require "Logic/MouseLook"
+require "Logic/MoveControl"
 require "Logic/SkillControl"
 require "Logic/GameEntity"
 
@@ -38,8 +38,8 @@ function World.onAvatarEnterWorld( avatar )
 	avatar.renderObj = go;
 	go.transform.position = avatar.position;
 	--go.transform.direction = avatar.direction;
-	MouseLook.transform = go.transform;
-	MouseLook.StartUpdate();
+	MoveControl.transform = go.transform;
+	MoveControl.StartUpdate();
 	--初始化对象
 	World.InitEntity(avatar);
 
@@ -123,7 +123,9 @@ function World.set_state( entity , v)
 end
 
 function World.set_HP( entity , v)
-	
+	if entity.renderObj ~= nil then
+		entity.gameEntity:UpdateHp();
+	end
 end
 
 function World.set_HP_Max( entity , v)
