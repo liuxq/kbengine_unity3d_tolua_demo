@@ -14,14 +14,19 @@ public class LuaManager :MonoBehaviour{
         this.OpenLibs();
         lua.LuaSetTop(0);
 
-        LuaBinder.Bind(lua);
-        LuaCoroutine.Register(lua, this);
+        Bind();
     }
 
     public void InitStart() {
         InitLuaPath();
         this.lua.Start();    //启动LUAVM
         this.StartLooper();
+    }
+    protected virtual void Bind()
+    {
+        LuaBinder.Bind(lua);
+        DelegateFactory.Init();
+        LuaCoroutine.Register(lua, this);
     }
 
     void StartLooper() {
@@ -57,6 +62,7 @@ public class LuaManager :MonoBehaviour{
     void InitLuaPath() {
         string rootPath = Application.dataPath;
         lua.AddSearchPath(rootPath + "/Lua");
+        lua.AddSearchPath(rootPath + "/KbenginePlugins/Lua");
         lua.AddSearchPath(rootPath + "/ToLua/Lua");
     }
 
@@ -68,7 +74,7 @@ public class LuaManager :MonoBehaviour{
     public object[] CallFunction(string funcName, params object[] args) {
         LuaFunction func = lua.GetFunction(funcName);
         if (func != null) {
-            return func.Call(args);
+            return func.LazyCall(args);
         }
         return null;
     }

@@ -2,13 +2,13 @@
 KBEngineLua = {}
 local this = KBEngineLua;
 
-require "KbePlugins/LuaUtil"
-require "KbePlugins/DataType"
-require "KbePlugins/Message"
-require "KbePlugins/Bundle"
-require "KbePlugins/Mailbox"
-require "KbePlugins/Entity"
-require "KbePlugins/PersistentInfos"
+require "LuaUtil"
+require "DataType"
+require "Message"
+require "Bundle"
+require "Mailbox"
+require "Entity"
+require "PersistentInfos"
 
 
 

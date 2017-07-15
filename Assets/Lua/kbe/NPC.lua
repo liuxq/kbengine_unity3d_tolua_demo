@@ -1,4 +1,4 @@
-require "Kbe/Interface/GameObject"
+require "Kbe/interface/GameObject"
 
 KBEngineLua.NPC = {
 };

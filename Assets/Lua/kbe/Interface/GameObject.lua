@@ -1,4 +1,4 @@
-require "KbePlugins/Entity"
+require "Entity"
 
 KBEngineLua.GameObject = {
 	gameEntity = nil,

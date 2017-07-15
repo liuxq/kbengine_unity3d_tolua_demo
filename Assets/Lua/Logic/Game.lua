@@ -1,6 +1,6 @@
-Event = require 'KbePlugins/events'
-require "KbePlugins/Dbg"
-require "KbePlugins/KBEngine"
+Event = require 'events'
+require "Dbg"
+require "KBEngine"
 
 require "Kbe/Account"
 require "Kbe/Avatar"

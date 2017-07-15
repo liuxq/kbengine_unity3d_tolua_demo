@@ -1,6 +1,6 @@
-require "Kbe/Interface/GameObject"
-require "Logic/SkillBox"
-require "Logic/Skill"
+require "Kbe/interface/GameObject"
+require "Kbe/skills/SkillBox"
+require "Kbe/skills/Skill"
 
 KBEngineLua.Avatar = {
 	itemDict = {},
