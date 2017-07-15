@@ -42,7 +42,7 @@ namespace LuaInterface
 
     //让byte[] 压入成为lua string 而不是数组 userdata
     //也可以使用LuaByteBufferAttribute来标记byte[]
-    public struct LuaByteBuffer
+    public class LuaByteBuffer
     {        
         public LuaByteBuffer(IntPtr source, int len)
         {

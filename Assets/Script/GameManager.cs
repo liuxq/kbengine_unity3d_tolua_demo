@@ -11,19 +11,21 @@ public class GameManager : MonoBehaviour {
     protected static bool initialize = false;
 
     LuaManager mLuaManager = null;
+    KBEMain mKbeMain = null;
     /// <summary>
     /// 初始化游戏管理器
     /// </summary>
     void Start() {
-        Init();
-    }
-
-    /// <summary>
-    /// 初始化
-    /// </summary>
-    void Init() {
         DontDestroyOnLoad(gameObject);  //防止销毁自己
+
         mLuaManager = gameObject.GetComponent<LuaManager>();
+        if (mLuaManager == null)
+            mLuaManager = gameObject.AddComponent<LuaManager>();
+
+        mKbeMain = gameObject.GetComponent<KBEMain>();
+        if (mKbeMain == null)
+            mKbeMain = gameObject.AddComponent<KBEMain>();
+
         OnInitialize();
     }
 
@@ -32,7 +34,7 @@ public class GameManager : MonoBehaviour {
         mLuaManager.DoFile("Logic/Game");         //加载游戏
         mLuaManager.CallFunction("Game.OnInitOK");     //初始化完成
 
-        KBEngine.Event.fireIn("onResourceInitFinish");
+        mKbeMain.initKBEngine();
         initialize = true;
     }
 
