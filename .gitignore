@@ -21,6 +21,8 @@
 sysinfo.txt
 /Assets/UnityVS.meta
 /Assets/UnityVS
+/Assets/Source/Generate/*Wrap.cs
+/Assets/Source/Generate/*Wrap.cs.meta
 /UnityVS.tolua.v11.suo
 /UnityVS.tolua.CSharp.csproj
 /UnityVS.tolua.CSharp.Editor.csproj
