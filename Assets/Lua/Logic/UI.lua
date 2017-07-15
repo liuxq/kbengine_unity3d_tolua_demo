@@ -167,7 +167,7 @@ function UI.onLoginUI()
 		if(#this.stringAccount > 0 and #this.stringPasswd > 5) then
 			this.login();
 		else
-			logError("account or password is error, length < 6!(账号或者密码错误，长度必须大于5!)");
+			this.info("account or password is error, length < 6!(账号或者密码错误，长度必须大于5!)");
 		end
     end
 
@@ -178,7 +178,7 @@ function UI.onLoginUI()
 		if(#this.stringAccount > 0 and #this.stringPasswd > 5) then
 			this.createAccount();
 		else
-			logError("account or password is error, length < 6!(账号或者密码错误，长度必须大于5!)");
+			this.info("account or password is error, length < 6!(账号或者密码错误，长度必须大于5!)");
 		end
     end
     
