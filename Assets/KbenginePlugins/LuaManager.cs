@@ -21,7 +21,6 @@ public class LuaManager :MonoBehaviour{
     public void InitStart() {
         InitLuaPath();
         this.lua.Start();    //启动LUAVM
-        this.StartMain();
         this.StartLooper();
     }
 
@@ -38,15 +37,6 @@ public class LuaManager :MonoBehaviour{
 
         lua.OpenLibs(LuaDLL.luaopen_cjson_safe);
         lua.LuaSetField(-2, "cjson.safe");
-    }
-
-    void StartMain() {
-        lua.DoFile("Main.lua");
-
-        LuaFunction main = lua.GetFunction("Main");
-        main.Call();
-        main.Dispose();
-        main = null;    
     }
         
     /// <summary>

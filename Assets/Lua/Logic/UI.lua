@@ -183,7 +183,7 @@ function UI.onLoginUI()
     end
     
 	this.stringAccount = GUI.TextField(Rect.New (Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 30), this.stringAccount, 20);
-	this.stringPasswd = GUI.PasswordField(Rect.New (Screen.width / 2 - 100, Screen.height / 2 - 10, 200, 30), this.stringPasswd, 69);
+	this.stringPasswd = GUI.PasswordField(Rect.New (Screen.width / 2 - 100, Screen.height / 2 - 10, 200, 30), this.stringPasswd, string.byte('*'));
 end
 
 function UI.onWorldUI()
@@ -198,7 +198,7 @@ function UI.onWorldUI()
 	
 	local obj = UnityEngine.GameObject.Find("player(Clone)");
 	if(obj ~= nil) then
-		GUI.Label(Rect.New((Screen.width / 2) - 100, 20, 400, 100), "position=" .. obj.transform.position["x"]..obj.transform.position["y"]..obj.transform.position["z"]); 
+		GUI.Label(Rect.New((Screen.width / 2) - 100, 20, 400, 100), "position=" .. string.format("%.2f",obj.transform.position.x).." "..string.format("%.2f",obj.transform.position.y).." "..string.format("%.2f",obj.transform.position.z)); 
 	end
 end
 

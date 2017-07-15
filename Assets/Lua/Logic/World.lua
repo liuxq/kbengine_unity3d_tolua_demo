@@ -1,6 +1,3 @@
-require "Logic/MoveControl"
-require "Logic/SkillControl"
-require "Logic/GameEntity"
 
 World = {
 };
@@ -34,20 +31,17 @@ function World.onAvatarEnterWorld( avatar )
 	end
 
 	local obj = UnityEngine.Resources.Load("player");
-	local go = newObject(obj);
-	avatar.renderObj = go;
-	go.transform.position = avatar.position;
-	--go.transform.direction = avatar.direction;
-	MoveControl.transform = go.transform;
+	local playerObj = newObject(obj);
+	avatar.renderObj = playerObj;
+	playerObj.transform.position = avatar.position;
+	--playerObj.transform.direction = avatar.direction;
+	MoveControl.playerTransform = playerObj.transform;
+	MoveControl.characterControl = playerObj:GetComponent("CharacterController");
 	MoveControl.StartUpdate();
 	--初始化对象
 	World.InitEntity(avatar);
 
-	--初始化角色技能控制
-	SkillControl.Init(avatar);
-
-	UpdateBeat:Add(SkillControl.Update);
-	
+	UI.info("loading scene...(加载场景中...)");
 end
 
 function World.onEnterWorld( entity )
@@ -66,13 +60,16 @@ function World.InitEntity( entity )
 	entity.gameEntity = GameEntity:New();
 	entity.gameEntity:Init(entity);		
 	if entity.name then
-		World.set_name( entity , entity.name )
+		World.set_name( entity , entity.name );
 	end
 	if entity.direction then
-		World.set_direction( entity )
+		World.set_direction( entity );
 	end
 	if entity.position then
-		World.set_position( entity )
+		World.set_position( entity );
+	end
+	if entity.state then
+		World.set_state( entity );
 	end
 end
 
@@ -86,8 +83,9 @@ function World.onLeaveWorld(entity)
 	end
 end
 
-function World.addSpaceGeometryMapping( path )
+function World.addSpaceGeometryMapping( respath )
 
+	UI.info("scene(" .. respath .. "), spaceID=" .. KBEngineLua.spaceID);
 	local obj = newObject(UnityEngine.Resources.Load("terrain"));
 
 end
@@ -139,17 +137,5 @@ function World.updatePosition( entity )
 end
 
 function World.recvDamage( receiver, attacker, skillID, damageType, damage )
-	local sk = SkillBox.Get(skillID);
-    if (sk ~= nil) then
-        local renderObj = attacker.renderObj;
-        renderObj:GetComponent("Animator"):Play("Punch");
-
-        if attacker:isPlayer() then   
-        	local dir = receiver.position - attacker.position; 
-            renderObj.transform:LookAt(Vector3.New(renderObj.transform.position.x + dir.x, renderObj.transform.position.y, renderObj.transform.position.z + dir.z));
-        end
-
-        --显示技能效果
-        sk:displaySkill(attacker, receiver);
-    end
+	
 end

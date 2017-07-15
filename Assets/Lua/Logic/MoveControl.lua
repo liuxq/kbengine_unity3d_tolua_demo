@@ -4,7 +4,7 @@ RotationAxes =
 };
 
 MoveControl = {
-    axes = RotationAxes.MouseXAndY,
+    axes = RotationAxes.MouseX,
     sensitivityX = 15,
     sensitivityY = 15,
 
@@ -13,8 +13,10 @@ MoveControl = {
 
     rotationY = 0,
 
-    moveSpeed = 0.05,
-    transform = nil,
+    moveSpeed = 10,
+    
+    playerTransform = nil,
+    characterControl = nil,
 };
 
 local this = MoveControl;
@@ -23,23 +25,24 @@ function MoveControl.StartUpdate()
     UpdateBeat:Add(MoveControl.Update, MoveControl);
 end
 
-function MoveControl.Update( )
+function MoveControl.Update( a )
+    local Time = UnityEngine.Time;
     local Input = UnityEngine.Input;
     if (Input.GetMouseButton (1)) then
         if (this.axes == RotationAxes.MouseXAndY)  then
-            local rotationX = this.transform.localEulerAngles.y + Input.GetAxis ("Mouse X") * this.sensitivityX;
+            local rotationX = this.playerTransform.localEulerAngles.y + Input.GetAxis ("Mouse X") * this.sensitivityX;
 
             this.rotationY = this.rotationY + Input.GetAxis ("Mouse Y") * this.sensitivityY;
             this.rotationY = Mathf.Clamp (this.rotationY, this.minimumY, this.maximumY);
 
-            this.transform.localEulerAngles = Vector3.New(-this.rotationY, rotationX, 0);
+            this.playerTransform.localEulerAngles = Vector3.New(-this.rotationY, rotationX, 0);
         elseif (this.axes == RotationAxes.MouseX)  then
-            this.transform.Rotate (0, Input.GetAxis ("Mouse X") * this.sensitivityX, 0);
+            this.playerTransform:Rotate(0, Input.GetAxis ("Mouse X") * this.sensitivityX, 0);
         else
             this.rotationY = this.rotationY + Input.GetAxis ("Mouse Y") * this.sensitivityY;
             this.rotationY = Mathf.Clamp (this.rotationY, this.minimumY, this.maximumY);
 
-            this.transform.localEulerAngles = Vector3.New(-this.rotationY, this.transform.localEulerAngles.y, 0);
+            this.playerTransform.localEulerAngles = Vector3.New(-this.rotationY, this.playerTransform.localEulerAngles.y, 0);
         end
     end
 
@@ -63,5 +66,6 @@ function MoveControl.Update( )
     end
     
     -- Apply the direction to the CharacterMotor
-    this.transform.position = this.transform.position + this.transform.rotation * directionVector * this.moveSpeed;
+    this.characterControl:Move(this.playerTransform.rotation * directionVector * this.moveSpeed *Time.deltaTime);
+    --this.transform.position = this.transform.position + this.transform.rotation * directionVector * this.moveSpeed;
 end

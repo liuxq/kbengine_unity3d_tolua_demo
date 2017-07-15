@@ -46,18 +46,19 @@ end
 function KBEngineLua.Avatar:useTargetSkill(skillID, target)        
     local skill = SkillBox.Get(skillID);
     if (skill == nil) then
-        return 4;
+        return false;
     end
 
     if target == nil then
-        return 4;
+        return false;
     end
-    local errorCode = skill:validCast(self, target);
-    if (errorCode == 0) then         
+
+    if (skill:validCast(self, target)) then         
         skill:use(self, target);
-        return errorCode;
+        return true;
     end
-    return errorCode;
+    
+    return false;
 end
 
 -------client method-----------------------------------

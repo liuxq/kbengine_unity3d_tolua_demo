@@ -1,13 +1,17 @@
 Event = require 'KbePlugins/events'
 require "KbePlugins/Dbg"
 require "KbePlugins/KBEngine"
+
 require "Kbe/Account"
 require "Kbe/Avatar"
 require "Kbe/Gate"
 require "Kbe/Monster"
 require "Kbe/NPC"
+
+require "Logic/MoveControl"
+require "Logic/GameEntity"
 require "Logic/World"
-require "View/UI"
+require "Logic/UI"
 
 
 --管理器--
