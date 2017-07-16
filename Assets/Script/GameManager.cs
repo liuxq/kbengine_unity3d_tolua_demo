@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour {
         mLuaManager.DoFile("Logic/Game");         //加载游戏
         mLuaManager.CallFunction("Game.OnInitOK");     //初始化完成
 
-        mKbeMain.initKBEngine();
+        mKbeMain.InitKBEngine();
         initialize = true;
     }
 
