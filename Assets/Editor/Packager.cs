@@ -71,7 +71,7 @@ public class Packager {
             HandleLuaFile();
         }
 
-        HandleResBundle();//资源打包
+        //HandleResBundle();//资源打包
 
         string resPath = "Assets/" + AppConst.AssetDir;
         BuildAssetBundleOptions options = BuildAssetBundleOptions.DeterministicAssetBundle | 
@@ -186,9 +186,9 @@ public class Packager {
         if (!Directory.Exists(luaPath)) {
             Directory.CreateDirectory(luaPath); 
         }
-        string[] luaPaths = { AppDataPath + "/StriveGame/lua/", 
-                              AppDataPath + "/StriveGame/kbengine_unity3d_lua_plugins/Lua",
-                              AppDataPath + "/StriveGame/Tolua/Lua/" };
+        string[] luaPaths = { AppDataPath + "/lua/", 
+                              AppDataPath + "/kbengine_unity3d_lua_plugins/Lua",
+                              AppDataPath + "/Tolua/Lua/" };
 
         for (int i = 0; i < luaPaths.Length; i++) {
             paths.Clear(); files.Clear();
