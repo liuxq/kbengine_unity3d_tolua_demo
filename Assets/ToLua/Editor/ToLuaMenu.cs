@@ -948,7 +948,7 @@ public static class ToLuaMenu
         AssetDatabase.Refresh();
     }
 
-    static void CopyLuaBytesFiles(string sourceDir, string destDir, bool appendext = true, string searchPattern = "*.lua", SearchOption option = SearchOption.AllDirectories)
+    static public void CopyLuaBytesFiles(string sourceDir, string destDir, bool appendext = true, string searchPattern = "*.lua", SearchOption option = SearchOption.AllDirectories)
     {
         if (!Directory.Exists(sourceDir))
         {

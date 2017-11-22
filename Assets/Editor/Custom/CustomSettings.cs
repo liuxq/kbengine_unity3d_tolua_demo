@@ -11,6 +11,11 @@ using System.Reflection;
 
 public static class CustomSettings
 {
+    public static string FrameworkPath = AppConst.FrameworkRoot;
+    public static string luaDir = FrameworkPath + "/Lua/";
+    public static string kbeLuaDir = FrameworkPath + "/kbengine_unity3d_lua_plugins/Lua/";
+    public static string toluaLuaDir = FrameworkPath + "/ToLua/Lua";
+
     public static string saveDir = Application.dataPath + "/Source/Generate/";    
     public static string toluaBaseType = Application.dataPath + "/ToLua/BaseType/";    
 
