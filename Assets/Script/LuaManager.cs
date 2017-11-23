@@ -60,10 +60,18 @@ public class LuaManager :MonoBehaviour{
     /// 初始化Lua代码加载路径
     /// </summary>
     void InitLuaPath() {
-        string rootPath = Application.dataPath;
-        lua.AddSearchPath(rootPath + "/Lua");
-        lua.AddSearchPath(rootPath + "/kbengine_unity3d_lua_plugins/Lua");
-        lua.AddSearchPath(rootPath + "/ToLua/Lua");
+        
+        if (Application.isEditor)
+        {
+            string rootPath = Application.dataPath;
+            lua.AddSearchPath(rootPath + "/Lua");
+            lua.AddSearchPath(rootPath + "/kbengine_unity3d_lua_plugins/Lua");
+            lua.AddSearchPath(rootPath + "/ToLua/Lua");
+        }
+        else
+        {
+            lua.AddSearchPath(Application.streamingAssetsPath + "/Lua");
+        }
     }
 
     public object[] DoFile(string filename) {
