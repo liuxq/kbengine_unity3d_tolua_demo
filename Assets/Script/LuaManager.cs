@@ -68,10 +68,6 @@ public class LuaManager :MonoBehaviour{
             lua.AddSearchPath(rootPath + "/kbengine_unity3d_lua_plugins/Lua");
             lua.AddSearchPath(rootPath + "/ToLua/Lua");
         }
-        else
-        {
-            lua.AddSearchPath(Application.streamingAssetsPath + "/Lua");
-        }
     }
 
     public object[] DoFile(string filename) {

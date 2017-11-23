@@ -7,49 +7,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 public class Packager {
-    public static string platform = string.Empty;
     static List<string> files = new List<string>();
 
-
-    /// <summary>
-    /// 取得数据存放目录
-    /// </summary>
-    public static string DataPath
-    {
-        get
-        {
-            return Application.dataPath + "/StreamingAssets/";
-        }
-    }
-
-    [MenuItem("Publish/Copy lua to StreamingAssets", false, 102)]
+    [MenuItem("Publish/Copy lua to Resources", false, 102)]
     public static void BuildWindowsResource() {
-        BuildAssetResource();
-    }
-
-    /// <summary>
-    /// 生成绑定素材
-    /// </summary>
-    public static void BuildAssetResource() {
-        if (Directory.Exists(DataPath)) {
-            Directory.Delete(DataPath, true);
-        }
-        string streamPath = Application.streamingAssetsPath;
-        if (Directory.Exists(streamPath)) {
-            Directory.Delete(streamPath, true);
-        }
-        Directory.CreateDirectory(streamPath);
-        AssetDatabase.Refresh();
-
         HandleLuaFile();
     }
 
-    
     /// <summary>
     /// 处理Lua文件
     /// </summary>
     static void HandleLuaFile() {
-        string resPath = AppDataPath + "/StreamingAssets/";
+        string resPath = AppDataPath + "/Resources/";
         string luaPath = resPath + "/lua/";
 
         //----------复制Lua文件----------------
@@ -67,7 +36,7 @@ public class Packager {
             int n = 0;
             foreach (string f in files) {
                 if (f.EndsWith(".meta")) continue;
-                string newfile = f.Replace(luaDataPath, "");
+                string newfile = f.Replace(luaDataPath, "").Replace(".lua",".bytes");
                 string newpath = luaPath + newfile;
                 string path = Path.GetDirectoryName(newpath);
                 if (!Directory.Exists(path)) Directory.CreateDirectory(path);
