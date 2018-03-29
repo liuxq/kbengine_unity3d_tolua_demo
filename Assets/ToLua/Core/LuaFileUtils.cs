@@ -155,32 +155,25 @@ namespace LuaInterface
 
         public virtual byte[] ReadFile(string fileName)
         {
-            if (Application.isEditor)
+            if (!beZip)
             {
                 string path = FindFile(fileName);
                 byte[] str = null;
 
                 if (!string.IsNullOrEmpty(path) && File.Exists(path))
                 {
+#if !UNITY_WEBPLAYER
                     str = File.ReadAllBytes(path);
+#else
+                    throw new LuaException("can't run in web platform, please switch to other platform");
+#endif
                 }
 
                 return str;
             }
             else
             {
-
-                if (fileName.EndsWith(".lua"))
-                {
-                    fileName = fileName.Substring(0, fileName.Length - 4);
-                }
-
-                Object ta = Resources.Load("lua/" + fileName);
-                if (ta != null)
-                {
-                    return (ta as TextAsset).bytes;
-                }
-                return null;
+                return ReadZipFile(fileName);
             }
         }        
 

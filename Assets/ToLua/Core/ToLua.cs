@@ -142,7 +142,7 @@ namespace LuaInterface
         }
 
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int Print(IntPtr L)
+        static public int Print(IntPtr L)
         {
             try
             {

@@ -311,12 +311,12 @@ function UI.onLoginSuccessfully(rndUUID, eid, accountEntity)
 	this.info("login is successfully!(登陆成功!)");
 	ui_state = 1;
 
-	Application.LoadLevel("selavatars");
+	SceneManager.LoadScene("selavatars");
 end
 
 function UI.onKicked(failedcode)
 	logError("kick, disconnect!, reason=" .. KBEngineLua.serverlogError(failedcode));
-	Application.LoadLevel("login");
+	SceneManager.LoadScene("login");
 	ui_state = 0;
 end
 

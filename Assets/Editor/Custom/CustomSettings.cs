@@ -135,8 +135,9 @@ public static class CustomSettings
         _GT(typeof(QualitySettings)),
         _GT(typeof(RenderSettings)),                                                   
         _GT(typeof(BlendWeights)),           
-        _GT(typeof(RenderTexture)),    
-		_GT(typeof(Resources)),   
+        _GT(typeof(RenderTexture)),
+        _GT(typeof(Resources)),     
+        _GT(typeof(LuaProfiler)),
           
         //for LuaFramework
         _GT(typeof(RectTransform)),
@@ -245,4 +246,7 @@ public static class CustomSettings
     {
         return new DelegateType(t);
     }    
+
+
+    
 }

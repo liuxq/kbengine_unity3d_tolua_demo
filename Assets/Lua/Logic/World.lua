@@ -78,7 +78,7 @@ function World.onLeaveWorld(entity)
 		entity.gameEntity:Destroy();
 	end
 	if entity.renderObj ~= nil then
-		destroy(entity.renderObj);
+		UnityEngine.Object.Destroy(entity.renderObj);
 		entity.renderObj = nil;
 	end
 end
